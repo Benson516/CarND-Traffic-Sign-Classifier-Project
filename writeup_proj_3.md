@@ -98,16 +98,20 @@ My final model consisted of the following layers:
 
 | Layer         		|     Description	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Input         		| 32x32x3 RGB image in `dtype=np.uint8` 							| 
-| Convolution 3x3     	| 1x1 stride, same padding, outputs 32x32x16 	|
-| RELU					|						    	|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x16	|
-| Convolution 5x5	    | 1x1 stride, same padding, outputs 16x16x16  |
-| Fully connected		| etc.        									|
-| Softmax				| etc.        									|
-|						|												|
-|						|												|
- 
+| Input         		| 32x32x3 RGB image, `dtype=np.uint8` | 
+| Casting         		| 32x32x3 RGB image, `dtype=np.float32` | 
+| Convolution 1, 3x3   	| 1x1 stride, same padding, outputs 32x32x16 |
+| RELU 1				|						    	|
+| Max pooling 1	      	| 2x2 stride,  outputs 16x16x16	|
+| Convolution 2, 5x5    | 1x1 stride, same padding, outputs 16x16x16  |
+| RELU 2				|						    	|
+| Max pooling 2	      	| 2x2 stride,  outputs 8x8x16	|
+| Flaten	      	    | inputs 8x8x16, outputs 1024 	|
+| Fully connected 1		| inputs 1024 , outputs 120        		|
+| Fully connected 2		| input 120 , output 84        		|
+| Fully connected 3		| input 84 , output 43        		|
+| Softmax				| 43 output	classes in one-hot coding  |
+
 
 
 #### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
