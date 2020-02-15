@@ -14,7 +14,9 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./output_images/data_statistic/distribution_train.png "Distribution"
+[image101]: ./output_images/data_statistic/distribution_train.png "Distribution of tranning set"
+[image102]: ./output_images/data_statistic/distribution_valid.png "Distribution of validation set"
+[image103]: ./output_images/data_statistic/distribution_test.png "Distribution of test set"
 [image2]: ./examples/grayscale.jpg "Grayscaling"
 [image3]: ./examples/random_noise.jpg "Random Noise"
 [image4]: ./examples/placeholder.png "Traffic Sign 1"
@@ -54,10 +56,18 @@ I can use `len(set(y_train))` command to calculate the unique number of classes 
 
 #### 2. Include an exploratory visualization of the dataset.
 
-Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
+The dataset has totally `43` classes, and their distributions are shown in Fig.1, 2, and 3. From the plot we can see that the distribution is not quite even; hoever, the distribution is similar among three data set.
 
-![alt text][image1]
+![alt text][image101]
 Fig. 1 The distribution of trainning set.
+
+![alt text][image102]
+Fig. 2 The distribution of trainning set.
+
+![alt text][image103]
+Fig. 3 The distribution of trainning set.
+
+
 
 ### Design and Test a Model Architecture
 
