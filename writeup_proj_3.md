@@ -49,7 +49,7 @@ I accesed to the numpy shape member to get imformation of the traffic signs data
 
 Note:
 
-I can use `len(set(y_train))` command to calculate the unique number of classes `in` data set. However, it is possible that the dataset does not cover all the classes we defined. I use `len(signnames_dict)` instead. Where `signnames_dict` is a python dictionary that stores the mapping of `(class number):(class definition string)` listed in `signnames.csv` files.
+I can use `len(set(y_train))` command to calculate the unique number of classes **in** data set. However, it is possible that the dataset does not cover all the classes we defined. I use `len(signnames_dict)` instead. Where `signnames_dict` is a python dictionary that stores the mapping of `(class number):(class definition string)` listed in `signnames.csv` files.
 
 
 
@@ -101,22 +101,47 @@ My final model consisted of the following layers:
 | Input         		| 32x32x3 RGB image, `dtype=np.uint8` | 
 | Casting         		| 32x32x3 RGB image, `dtype=np.float32` | 
 | Convolution 1, 3x3   	| 1x1 stride, same padding, outputs 32x32x16 |
-| RELU 1				|						    	|
+| Leaky-RELU 1			| leak-slope 0.2	    	|
 | Max pooling 1	      	| 2x2 stride,  outputs 16x16x16	|
 | Convolution 2, 5x5    | 1x1 stride, same padding, outputs 16x16x16  |
-| RELU 2				|						    	|
+| Leaky-RELU 2			| leak-slope 0.2					    	|
 | Max pooling 2	      	| 2x2 stride,  outputs 8x8x16	|
 | Flaten	      	    | inputs 8x8x16, outputs 1024 	|
 | Fully connected 1		| inputs 1024 , outputs 120        		|
-| Fully connected 2		| input 120 , output 84        		|
-| Fully connected 3		| input 84 , output 43        		|
+| Leaky-RELU 3			| leak-slope 0.2					    	|
+| Dropout 1| |
+| Fully connected 2		| input 120 , output 84        	    	|
+| Leaky-RELU 4			| leak-slope 0.2					    	|
+| Dropout 2| |
+| Fully connected 3		| input 84 , output 43        		    |
 | Softmax				| 43 output	classes in one-hot coding  |
 
 
 
 #### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-To train the model, I used an ....
+For tranning the model, I use `AdamOptimizer` with default hyper parameters to optimize the model. Other parameters are listed in the below table.
+
+| Parameter      | value			| 
+|:--------------:|:----------------:| 
+| learning rate **High**, for accuracy in [0, 0.9)      | 0.0018    |
+| learning rate **Mid**, for accuracy in [0.9, 0.99)    | 0.0008    |
+| learning rate **Low**, for accuracy in [0.9, 1.0]     | 0.0005    | 
+| batch size | 128 |
+| number of epochs | 30 |
+| keep_prob of dropout layers| 0.5|
+|beta for regularization | 0.2 |
+
+The loss function for trainning model is calculated as following
+```python
+loss_operation = tf.reduce_mean(cross_entropy + beta * regularizer)
+```
+, where the **regularizer** is calculated by the following
+```python
+# weights['out'] is the weight matrix of "Fully connected 3" layer defined above
+regularizer = tf.nn.l2_loss(weights['out'])
+```
+
 
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
