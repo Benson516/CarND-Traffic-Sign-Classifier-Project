@@ -159,9 +159,17 @@ regularizer = tf.nn.l2_loss(weights['out'])
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
-* training set accuracy of 
-* validation set accuracy of 0.933
-* test set accuracy of 0.927
+* training set accuracy of 0.997
+* validation set accuracy of 0.939
+* test set accuracy of 0.934
+
+I chose LeNet as the initial architecture; however, after first time of training, the validation accuracy turns out to be less than 0.93 while the accuracy of training set is approaching to 1.0. I realize this is a symble of overfiting; therefore, I utilize the regulization on weights of last fully-connected layer and drop-out (p=0.5) after the activation layer of each fully-connected layer. This provide a good accuracy (0.93) on the validation set of the German Traffic Sign data set that satisfied the minimum criterion of the project.
+
+
+
+
+
+
 
 If an iterative approach was chosen:
 * What was the first architecture that was tried and why was it chosen?
