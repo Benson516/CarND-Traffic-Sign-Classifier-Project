@@ -17,7 +17,8 @@ The goals / steps of this project are the following:
 [image101]: ./output_images/data_statistic/distribution_train.png "Distribution of tranning set"
 [image102]: ./output_images/data_statistic/distribution_valid.png "Distribution of validation set"
 [image103]: ./output_images/data_statistic/distribution_test.png "Distribution of test set"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
+[image201]: ./output_images/data_preprocessing/img_before.png "Original image"
+[image202]: ./output_images/data_preprocessing/img_after.png "Image after normalizing"
 [image3]: ./examples/random_noise.jpg "Random Noise"
 [image4]: ./examples/placeholder.png "Traffic Sign 1"
 [image5]: ./examples/placeholder.png "Traffic Sign 2"
@@ -78,28 +79,30 @@ Before sending data into network, I constructed preprocessing steps:
 
 This is the only manually-coded proccess in sign classification. There is a prior knoledge I inserted that the traffic sign is not utilizing the intensity as a feature for distinguishing between signs; therefore, I normalize the intensity of each channel by the following mapping (x_min, x_max) --> (0, 255), where x_min/x_max is the minimum/maximum pixel value among all channels. However, I don't convert the original image into grayscale because I think that the color is an important feature in design of traffic signs.
 
+The following is the code for normalizing the data. Note that I only choose the ROI of `image[5:27:, 5:27:]` to calculate the minimum and maximum pixel values because the sign is mostly located at the center region of image.
+
+```python
+def pre_processing(a_single_x):
+    """
+    This processing is for every single data.
+    Note: I don't process all data at once because 
+           there might have some adaptive function in preprocessing 
+           which is different for different input data.
+    """
+    br = 5
+    x_min, x_max = np.min(a_single_x[br:-br:]), np.max(a_single_x[br:-br:])
+    a_single_x_modified = np.clip( (a_single_x.astype(np.float32) - x_min) * (255.0/(x_max-x_min)), 0.0, 255.0 ).astype(np.uint8)
+    return a_single_x_modified
+```
 
 
+Here is an example of a traffic sign image before and after normalizing.
 
-Here is an example of a traffic sign image before and after grayscaling.
+![alt text][image201]
+![alt text][image202]
 
-![alt text][image2]
+Fig. 4 Image before (top) and after normalizing (down)
 
-As a last step, I normalized the image data because ...
-
-
-
-
-
-I decided to generate additional data because ... 
-
-To add more data to the the data set, I used the following techniques because ... 
-
-Here is an example of an original image and an augmented image:
-
-![alt text][image3]
-
-The difference between the original data set and the augmented data set is the following ... 
 
 
 #### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
