@@ -133,7 +133,7 @@ My final model consisted of the following layers:
 
 #### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-For tranning the model, I use `AdamOptimizer` with default hyper parameters to optimize the model. Other parameters are listed in the below table.
+For tranning the model, I use `AdamOptimizer` with default hyper parameters to optimize the model. Other hyper parameters are listed in the below table.
 
 | Parameter      | value			| 
 |:--------------:|:----------------:| 
@@ -145,11 +145,11 @@ For tranning the model, I use `AdamOptimizer` with default hyper parameters to o
 | keep_prob of dropout layers| 0.5|
 |beta for regularization | 0.2 |
 
-The loss function for trainning model is calculated as following
+The loss function for trainning model is calculated as follow.
 ```python
 loss_operation = tf.reduce_mean(cross_entropy + beta * regularizer)
 ```
-, where the **regularizer** is calculated by the following
+, where the **regularizer** is calculated by the following tf operation.
 ```python
 # weights['out'] is the weight matrix of "Fully connected 3" layer defined above
 regularizer = tf.nn.l2_loss(weights['out'])
@@ -159,9 +159,9 @@ regularizer = tf.nn.l2_loss(weights['out'])
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
-* training set accuracy of ?
-* validation set accuracy of ? 
-* test set accuracy of ?
+* training set accuracy of 
+* validation set accuracy of 0.933
+* test set accuracy of 0.927
 
 If an iterative approach was chosen:
 * What was the first architecture that was tried and why was it chosen?
@@ -186,6 +186,11 @@ Here are five German traffic signs that I found on the web:
 ![alt text][image7] ![alt text][image8]
 
 The first image might be difficult to classify because ...
+
+
+
+
+
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
