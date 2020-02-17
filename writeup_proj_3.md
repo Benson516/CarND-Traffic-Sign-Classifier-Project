@@ -165,26 +165,11 @@ My final model results were:
 
 I chose LeNet-5 as the initial architecture; however, after first time of training, the validation accuracy turns out to be less than 0.93 while the accuracy of training set is approaching to 1.0. I realize this is a symble of overfiting; therefore, I utilize the regulization on weights of last fully-connected layer and drop-out (p=0.5) after the activation layer of each fully-connected layer. This provide a good accuracy (0.93) on the validation set of the German Traffic Sign data set that satisfied the minimum criterion of the project. 
 
-However, when I tested the model with images that are **not** from the German Traffic Sign Dataset, the model failed to classify any of the sign. 
+However, when I tested the model with images that are **not** from the German Traffic Sign Dataset, the model failed to classify any of the sign. After I visualize the activation of the first convolution layer using the `outputFeatureMap()` function, I discovered that the features it detected is quite restricted in the original LeNet-5 setting (6 channels for output featuremap). More specifically, at least one channel activated at the region of *sky* but none of them activated at the pattern drawn in the sign. 
+
+Finally, I decided to increase the number of channel in first convolutional layer to 16. This resulted in higher accuracy in tranning set, validation set, and test set. However, the predictions on new images still quite low. The analysis will be described below.
 
 
-
-
-
-
-
-If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-* What were some problems with the initial architecture?
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-* Which parameters were tuned? How were they adjusted and why?
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
-
-If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
- 
 
 ### Test a Model on New Images
 
