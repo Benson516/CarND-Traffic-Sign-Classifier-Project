@@ -108,8 +108,8 @@ Fig. 4 Image before (top) and after normalizing (down)
 
 My final model consisted of the following layers:
 
-| Layer         		|     Description	        					| 
-|:---------------------:|:---------------------------------------------:| 
+| Layer         		|     Description					| 
+|:---------------------|--------------------------------:| 
 | Input         		| 32x32x3 RGB image, `dtype=np.uint8` | 
 | Casting         		| 32x32x3 RGB image, `dtype=np.float32` | 
 | Convolution 1, 3x3   	| 1x1 stride, same padding, outputs 32x32x16 |
@@ -135,7 +135,7 @@ My final model consisted of the following layers:
 For tranning the model, I use `AdamOptimizer` with default hyper parameters to optimize the model. Other hyper parameters are listed in the below table.
 
 | Parameter      | value			| 
-|:--------------:|:----------------:| 
+|:--------------|----------------:| 
 | learning rate **High**, for accuracy in [0, 0.9)      | 0.0018    |
 | learning rate **Mid**, for accuracy in [0.9, 0.99)    | 0.0008    |
 | learning rate **Low**, for accuracy in [0.9, 1.0]     | 0.0005    | 
@@ -208,13 +208,13 @@ Beside the common reason of the difficulty to classify the "Children crossing (y
 
 Here are the results of the prediction:
 
-| Image			        |     Prediction	    | 
-|:---------------------:|:---------------------:| 
-| test_1.jpg      		| Stop sign			    | 
-| test_2.jpg     		| U-turn 				|
-| test_4.jpg			| Yield					|
-| test_5.jpg	      	| Bumpy Road			|
-| test_7.jpg			| Slippery Road 		|
+| Image	(Lable)		    |     Prediction	   | 
+|:----------------------|:---------------------| 
+| test_1.jpg (28)  		| 33 [Turn right ahead]                     | 
+| test_2.jpg (28)  		| 14 [Stop]                                 | 
+| test_4.jpg (28)  		| 22 [Bumpy road]                           | 
+| test_5.jpg (28)  		| 11 [Right-of-way at the next intersection]| 
+| test_7.jpg (28)  		| 28 [Children crossing]                    | 
 
 
 The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
