@@ -19,11 +19,20 @@ The goals / steps of this project are the following:
 [image103]: ./output_images/data_statistic/distribution_test.png "Distribution of test set"
 [image201]: ./output_images/data_preprocessing/img_before.png "Original image"
 [image202]: ./output_images/data_preprocessing/img_after.png "Image after normalizing"
+[image3]: ./output_images/training_results/plot_image_train.png "Training result"
 [image4]: ./output_images/test_image_proper_size_plot/test_1.png "Traffic Sign 1"
 [image5]: ./output_images/test_image_proper_size_plot/test_2.png "Traffic Sign 2"
 [image6]: ./output_images/test_image_proper_size_plot/test_4.png "Traffic Sign 3"
 [image7]: ./output_images/test_image_proper_size_plot/test_5.png "Traffic Sign 4"
 [image8]: ./output_images/test_image_proper_size_plot/test_7.png "Traffic Sign 5"
+[image901]: ./output_images/test_prob_bar_chart/test_1.png "Traffic Sign 1"
+[image902]: ./output_images/test_prob_bar_chart/test_2.png "Traffic Sign 2"
+[image903]: ./output_images/test_prob_bar_chart/test_4.png "Traffic Sign 3"
+[image904]: ./output_images/test_prob_bar_chart/test_5.png "Traffic Sign 4"
+[image905]: ./output_images/test_prob_bar_chart/test_7.png "Traffic Sign 5"
+[image10]: ./output_images/test_activation_viz/test_4.png "Traffic Sign 5"
+
+
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -112,13 +121,13 @@ My final model consisted of the following layers:
 |:---------------------|--------------------------------:| 
 | Input         		| 32x32x3 RGB image, `dtype=np.uint8` | 
 | Casting         		| 32x32x3 RGB image, `dtype=np.float32` | 
-| Convolution 1, 3x3   	| 1x1 stride, same padding, outputs 32x32x16 |
+| Convolution 1, 3x3   	| 1x1 stride, VALID padding, outputs 30x30x16 |
 | Leaky-RELU 1			| leak-slope 0.2	    	|
-| Max pooling 1	      	| 2x2 stride,  outputs 16x16x16	|
-| Convolution 2, 5x5    | 1x1 stride, same padding, outputs 16x16x16  |
+| Max pooling 1	      	| 2x2 stride, VALID padding, outputs 15x15x16   |
+| Convolution 2, 3x3    | 1x1 stride, VALID padding, outputs 13x13x30 |
 | Leaky-RELU 2			| leak-slope 0.2					    	|
-| Max pooling 2	      	| 2x2 stride,  outputs 8x8x16	|
-| Flaten	      	    | inputs 8x8x16, outputs 1024 	|
+| Max pooling 2	      	| 2x2 stride, VALID padding, outputs 6x6x30 |
+| Flaten	      	    | inputs 6x6x30, outputs 1024 	|
 | Fully connected 1		| inputs 1024 , outputs 120        		|
 | Leaky-RELU 3			| leak-slope 0.2					    	|
 | Dropout 1| |
@@ -136,13 +145,13 @@ For tranning the model, I use `AdamOptimizer` with default hyper parameters to o
 
 | Parameter      | value			| 
 |:--------------|----------------:| 
-| learning rate **High**, for accuracy in [0, 0.9)      | 0.0018    |
-| learning rate **Mid**, for accuracy in [0.9, 0.99)    | 0.0008    |
-| learning rate **Low**, for accuracy in [0.9, 1.0]     | 0.0005    | 
+| learning rate **High**, for accuracy in [0, 0.97)      | 0.0018    |
+| learning rate **Mid**, for accuracy in [0.97, 0.995)    | 0.0008    |
+| learning rate **Low**, for accuracy in [0.995, 1.0]     | 0.0005    | 
 | batch size | 128 |
 | number of epochs | 30 |
 | keep_prob of dropout layers| 0.5|
-|beta for regularization | 0.2 |
+| beta for regularization | 0.2 |
 
 The loss function for trainning model is calculated as follow.
 ```python
@@ -158,9 +167,9 @@ regularizer = tf.nn.l2_loss(weights['out'])
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
-* training set accuracy of 0.997
-* validation set accuracy of 0.939
-* test set accuracy of 0.934
+* training set accuracy of 0.998
+* validation set accuracy of 0.961
+* test set accuracy of 0.945
 
 I chose `LeNet-5` as the initial architecture; however, after first time of training, the validation accuracy turns out to be less than 0.93 while the accuracy of training set is approaching to 1.0. I realize this is a symble of overfiting; therefore, I utilize the regulization on weights of last fully-connected layer and drop-out (p=0.5) after the activation layer of each fully-connected layer. This provide a good accuracy (0.93) on the validation set of the German Traffic Sign data set that satisfied the minimum criterion of the project. 
 
@@ -168,7 +177,11 @@ However, when I tested the model with images that are **not** from the German Tr
 
 Finally, I decided to increase the number of channel in first convolutional layer to 16. This resulted in higher accuracy in tranning set, validation set, and test set. However, the predictions on new images still quite low. The analysis will be described below.
 
+The following plots are the losses and accuracies during each epoch of training.
 
+![alt text][image3]
+
+Fig. 5 Losses and accuracies during training
 
 ### Test a Model on New Images
 
@@ -178,6 +191,8 @@ Here are five German traffic sign images I found on the web, which have be crorp
 
 ![alt text][image4] ![alt text][image5] ![alt text][image6] 
 ![alt text][image7] ![alt text][image8]
+
+Fig. 6 Five test images found on web 
 
 Original images can be found by following links:
 - https://www.alamy.com/a-german-traffic-sign-with-children-on-it-in-hanover-germany-03-july-image158680106.html
@@ -210,11 +225,11 @@ Here are the results of the prediction:
 
 | Image	(Lable)		    |     Prediction	   | 
 |:----------------------|:---------------------| 
-| test_1.jpg (28)  		| 33 [Turn right ahead]                     | 
-| test_2.jpg (28)  		| 14 [Stop]                                 | 
-| test_4.jpg (28)  		| 22 [Bumpy road]                           | 
-| test_5.jpg (28)  		| 11 [Right-of-way at the next intersection]| 
-| test_7.jpg (28)  		| 28 [Children crossing]                    | 
+| test_1.jpg (28)  		| 30 [Beware of ice/snow]           | 
+| test_2.jpg (28)  		| 13 [Yield]                        | 
+| test_4.jpg (28)  		| 29 [Bicycles crossing]            | 
+| test_5.jpg (28)  		| 24 [Road narrows on the right]    | 
+| test_7.jpg (28)  		| 28 [Children crossing]            | 
 
 
 The model can only correctly identify one of the five "Children crossing" signs, which gives an accuracy of 20%. The recall rate for "Children crossing" according to this test result is calculated as `1/5=20%`, and the precision for "Children crossing" is calculated as `1/1=100%` (Since there is no other class in this test set, it must be 100% if TP>=1). The result is far worse than the accuracy for test-set form original German Traffic Sign Dataset.
@@ -222,31 +237,59 @@ The model can only correctly identify one of the five "Children crossing" signs,
 From human perspective, the reason for the classifier to be confused may be
 | Image	(Lable)		    |     Prediction	   | Possible Confusion Reason |
 |:----------------------|:---------------------|:---| 
-| test_1.jpg (28)  		| 33 [Turn right ahead]                     |   Unknown, totally unrelated in human perspected |
-| test_2.jpg (28)  		| 14 [Stop]                                 | The sign is red. |
-| test_4.jpg (28)  		| 22 [Bumpy road]                           | The sign is in triangle shape with red boarder. |
-| test_5.jpg (28)  		| 11 [Right-of-way at the next intersection]| The sign is in triangle shape with red boarder. |
+| test_1.jpg (28)  		| 30 [Beware of ice/snow]           | The sign is in triangle shape with red boarder. |
+| test_2.jpg (28)  		| 13 [Yield]                        | The sign is in (reversed) triangle shape with red boarder. |
+| test_4.jpg (28)  		| 29 [Bicycles crossing]            | The sign is in triangle shape with red boarder. |
+| test_5.jpg (28)  		| 24 [Road narrows on the right]    | The sign is in triangle shape with red boarder. |
 | test_7.jpg (28)  		| 28 [Children crossing]                    | (correct) |
 
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
+The code for making predictions on my final model is located in the cell `#35` of the Ipython notebook.
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
+For the first image, the model is confusing around the "Beware of ice/snow" sign (probability of 0.731) and the "Road work" sign (probability of 0.227), which are both in red triangle shape. The top five soft max probabilities are shown in the below image.
 
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+![alt text][image901]
 
+Fig. 7 Probabilities output of softmax layer for "test_1.jpg"
 
-For the second image ... 
+For the second image, the model is quite shure aboud there is a "Yeild" sign in the image (probability of 0.832) while confusing with the "Priority road" sign. This is an interest result where the image indeed contained a "Priority road" sign at the top. The top five soft max probabilities are shown in the below image.
+
+![alt text][image902]
+
+Fig. 8 Probabilities output of softmax layer for "test_2.jpg"
+
+For the third image, the model is confusing around the "Bicycles crossing" sign (probability of 0.929) and the correct answer (probability of 0.070), which are both in red triangle shape. The top five soft max probabilities are shown in the below image.
+
+![alt text][image903]
+
+Fig. 9 Probabilities output of softmax layer for "test_4.jpg"
+
+For the forth image, the model is confusing around the "Road narrows on the right" sign (probability of 0.697) and the correct answer (probability of 0.099), which are both in red triangle shape. The top five soft max probabilities are shown in the below image.
+
+![alt text][image904]
+
+Fig. 10 Probabilities output of softmax layer for "test_5.jpg"
+
+For the fifth image, the model is has correct answer (probability of 0.840). The top five soft max probabilities are shown in the below image.
+
+![alt text][image905]
+
+Fig. 11 Probabilities output of softmax layer for "test_7.jpg"
 
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)
 #### 1. Discuss the visual output of your trained network's feature maps. What characteristics did the neural network use to make classifications?
 
 
+The following figure is the activation of first convolutionl layer with "test_4.jpg" as input image.
+
+![alt text][image10]
+
+Fig. 12 Visualization of the activation on first convolusion layer at "test_4.png"
+
+
+From the figure we can found the following insight about network
+- Channel 0, 7, 10  not trust worthy because they largly activated at sky.
+- Channel 2, 5, 11, 15 are quite sensitive to the red triangle boarder.
+- Channel 1, 6, 9, 11 get different part of the pattern in the sign.
