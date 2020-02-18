@@ -174,7 +174,7 @@ Finally, I decided to increase the number of channel in first convolutional laye
 
 #### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Here are five German traffic sign images I found on the web, which have be crorped and resized to proper size. All the signs I found here is "Children crossing (28)".
+Here are five German traffic sign images I found on the web, which have be crorped and resized to proper size. All the signs I found here is "Children crossing (y=28)".
 
 ![alt text][image4] ![alt text][image5] ![alt text][image6] 
 ![alt text][image7] ![alt text][image8]
@@ -187,34 +187,34 @@ Original images can be found by following links:
 - https://www.alamy.com/stock-photo-traffic-signs-children-crossing-and-speed-limit-defaced-sticker-covered-84970621.html
 
 
-All the "Children crossing (28)" sign are hard to classify because of the folowing reasons.
+All the "Children crossing (y=28)" sign are hard to classify because of the folowing reasons.
 - The pattern on the sign is blur in 32x32 image.
 - There are several similar triangle-shaped sign in the dataset that are hard to identify in 32x32 resolution, even by human.
-- There are 480 "Children crossing (28)" image in traning data, which are relatively rare in dataset. 
+- There are 480 "Children crossing (y=28)" image in traning data, which are relatively rare in dataset. 
 
-Beside the common reason of the difficulty to classify the "Children crossing (28)", there are some possible difficulties in each individual image.
+Beside the common reason of the difficulty to classify the "Children crossing (y=28)", there are some possible difficulties in each individual image.
 - The first image might be difficult to classify because it's tilting to the right and the color saturation is low related to other image.
-- The second image might be difficult to classify because it's tilting and contains other sign underneath the "Children crossing (28)".
-- The third image is hard to classify because there is another sign above the "Children crossing (28)".
+- The second image might be difficult to classify because it's tilting and contains other sign underneath the "Children crossing (y=28)".
+- The third image is hard to classify because there is another sign above the "Children crossing (y=28)".
 - The forth image is hard to classify because it's sheared and the background is relatively complex.
-- The fifth image is hard to classift because there is another sign underneath the "Children crossing (28)", the color of sign is shifted, and the background is complex.
+- The fifth image is hard to classift because there is another sign underneath the "Children crossing (y=28)", the color of sign is shifted, and the background is complex.
 
 
 
 
 
 
-#### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
+#### 2. Discuss the model's predictions on these new traffic signs and compare the results to prediction on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
 Here are the results of the prediction:
 
-| Image			        |     Prediction	        					| 
-|:---------------------:|:--------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+| Image			        |     Prediction	    | 
+|:---------------------:|:---------------------:| 
+| test_1.jpg      		| Stop sign			    | 
+| test_2.jpg     		| U-turn 				|
+| test_4.jpg			| Yield					|
+| test_5.jpg	      	| Bumpy Road			|
+| test_7.jpg			| Slippery Road 		|
 
 
 The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
