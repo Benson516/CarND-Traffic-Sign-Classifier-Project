@@ -174,7 +174,7 @@ Finally, I decided to increase the number of channel in first convolutional laye
 
 #### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Here are five German traffic sign images I found on the web, which have be crorped and resized to proper size.
+Here are five German traffic sign images I found on the web, which have be crorped and resized to proper size. All the signs I found here is "Children crossing (28)".
 
 ![alt text][image4] ![alt text][image5] ![alt text][image6] 
 ![alt text][image7] ![alt text][image8]
@@ -189,7 +189,13 @@ Original images can be found by following links:
 
 The first image might be difficult to classify because it's tilting to the right and the color saturation is low related to other image.
 
-The second image might be difficult to classify because
+The second image might be difficult to classify because it's tilting and contains other sign underneath the "Children crossing (28)".
+
+The third image is hard to classify because there is another sign above the "Children crossing (28)".
+
+The forth image is hard to classify because it's sheared and the background is relatively complex.
+
+The fifth image is hard to classift because there is another sign underneath the "Children crossing (28)", the color of sign is shifted, and the background is complex.
 
 
 
