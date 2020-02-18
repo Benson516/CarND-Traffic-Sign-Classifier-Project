@@ -187,15 +187,17 @@ Original images can be found by following links:
 - https://www.alamy.com/stock-photo-traffic-signs-children-crossing-and-speed-limit-defaced-sticker-covered-84970621.html
 
 
-The first image might be difficult to classify because it's tilting to the right and the color saturation is low related to other image.
+All the "Children crossing (28)" sign are hard to classify because of the folowing reasons.
+- The pattern on the sign is blur in 32x32 image.
+- There are several similar triangle-shaped sign in the dataset that are hard to identify in 32x32 resolution, even by human.
+- There are 480 "Children crossing (28)" image in traning data, which are relatively rare in dataset. 
 
-The second image might be difficult to classify because it's tilting and contains other sign underneath the "Children crossing (28)".
-
-The third image is hard to classify because there is another sign above the "Children crossing (28)".
-
-The forth image is hard to classify because it's sheared and the background is relatively complex.
-
-The fifth image is hard to classift because there is another sign underneath the "Children crossing (28)", the color of sign is shifted, and the background is complex.
+Beside the common reason of the difficulty to classify the "Children crossing (28)", there are some possible difficulties in each individual image.
+- The first image might be difficult to classify because it's tilting to the right and the color saturation is low related to other image.
+- The second image might be difficult to classify because it's tilting and contains other sign underneath the "Children crossing (28)".
+- The third image is hard to classify because there is another sign above the "Children crossing (28)".
+- The forth image is hard to classify because it's sheared and the background is relatively complex.
+- The fifth image is hard to classift because there is another sign underneath the "Children crossing (28)", the color of sign is shifted, and the background is complex.
 
 
 
