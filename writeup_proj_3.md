@@ -217,9 +217,17 @@ Here are the results of the prediction:
 | test_7.jpg (28)  		| 28 [Children crossing]                    | 
 
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+The model can only correctly identify one of the five "Children crossing" signs, which gives an accuracy of 20%. The recall rate for "Children crossing" according to this test result is calculated as `1/5=20%`, and the precision for "Children crossing" is calculated as `1/1=100%` (Since there is no other class in this test set, it must be 100% if TP>=1). The result is far worse than the accuracy for test-set form original German Traffic Sign Dataset.
 
-The model can only correctly identify one of the five "Children crossing" signs, which gives an accuracy of 20%. The recall rate for "Children crossing" according to this test result is calculated as `1/5=20%`, and the precision for "Children crossing" is calculated as `1/1=100%` (Since there is no other class in this test set, it must be 100% if TP>=1).
+From human perspective, the reason for the classifier to be confused may be
+| Image	(Lable)		    |     Prediction	   | Possible Confusion Reason |
+|:----------------------|:---------------------|:---| 
+| test_1.jpg (28)  		| 33 [Turn right ahead]                     |   Unknown, totally unrelated in human perspected |
+| test_2.jpg (28)  		| 14 [Stop]                                 | The sign is red. |
+| test_4.jpg (28)  		| 22 [Bumpy road]                           | The sign is in triangle shape with red boarder. |
+| test_5.jpg (28)  		| 11 [Right-of-way at the next intersection]| The sign is in triangle shape with red boarder. |
+| test_7.jpg (28)  		| 28 [Children crossing]                    | (correct) |
+
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
