@@ -19,12 +19,11 @@ The goals / steps of this project are the following:
 [image103]: ./output_images/data_statistic/distribution_test.png "Distribution of test set"
 [image201]: ./output_images/data_preprocessing/img_before.png "Original image"
 [image202]: ./output_images/data_preprocessing/img_after.png "Image after normalizing"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
+[image4]: ./output_images/test_image_proper_size_plot/test_1.png "Traffic Sign 1"
+[image5]: ./output_images/test_image_proper_size_plot/test_2.png "Traffic Sign 2"
+[image6]: ./output_images/test_image_proper_size_plot/test_4.png "Traffic Sign 3"
+[image7]: ./output_images/test_image_proper_size_plot/test_5.png "Traffic Sign 4"
+[image8]: ./output_images/test_image_proper_size_plot/test_7.png "Traffic Sign 5"
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -163,7 +162,7 @@ My final model results were:
 * validation set accuracy of 0.939
 * test set accuracy of 0.934
 
-I chose LeNet-5 as the initial architecture; however, after first time of training, the validation accuracy turns out to be less than 0.93 while the accuracy of training set is approaching to 1.0. I realize this is a symble of overfiting; therefore, I utilize the regulization on weights of last fully-connected layer and drop-out (p=0.5) after the activation layer of each fully-connected layer. This provide a good accuracy (0.93) on the validation set of the German Traffic Sign data set that satisfied the minimum criterion of the project. 
+I chose `LeNet-5` as the initial architecture; however, after first time of training, the validation accuracy turns out to be less than 0.93 while the accuracy of training set is approaching to 1.0. I realize this is a symble of overfiting; therefore, I utilize the regulization on weights of last fully-connected layer and drop-out (p=0.5) after the activation layer of each fully-connected layer. This provide a good accuracy (0.93) on the validation set of the German Traffic Sign data set that satisfied the minimum criterion of the project. 
 
 However, when I tested the model with images that are **not** from the German Traffic Sign Dataset, the model failed to classify any of the sign. After I visualize the activation of the first convolution layer using the `outputFeatureMap()` function, I discovered that the features it detected is quite restricted in the original LeNet-5 setting (6 channels for output featuremap). More specifically, at least one channel activated at the region of *sky* but none of them activated at the pattern drawn in the sign. 
 
@@ -175,12 +174,22 @@ Finally, I decided to increase the number of channel in first convolutional laye
 
 #### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Here are five German traffic signs that I found on the web:
+Here are five German traffic sign images I found on the web, which have be crorped and resized to proper size.
 
 ![alt text][image4] ![alt text][image5] ![alt text][image6] 
 ![alt text][image7] ![alt text][image8]
 
-The first image might be difficult to classify because ...
+Original images can be found by following links:
+- https://www.alamy.com/a-german-traffic-sign-with-children-on-it-in-hanover-germany-03-july-image158680106.html
+- https://www.123rf.com/photo_125616431_german-road-sign-children-crossing-way-to-school.html
+- https://cn.depositphotos.com/2069245/stock-photo-priority-road-and-children-crossing.html
+- https://www.alamy.com/children-crossing-warning-sign-in-germany-image3302585.html
+- https://www.alamy.com/stock-photo-traffic-signs-children-crossing-and-speed-limit-defaced-sticker-covered-84970621.html
+
+
+The first image might be difficult to classify because it's tilting to the right and the color saturation is low related to other image.
+
+The second image might be difficult to classify because
 
 
 
@@ -192,7 +201,7 @@ The first image might be difficult to classify because ...
 Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
+|:---------------------:|:--------------------:| 
 | Stop Sign      		| Stop sign   									| 
 | U-turn     			| U-turn 										|
 | Yield					| Yield											|
