@@ -127,8 +127,8 @@ My final model consisted of the following layers:
 | Convolution 2, 3x3    | 1x1 stride, VALID padding, outputs 13x13x30 |
 | Leaky-RELU 2			| leak-slope 0.2					    	|
 | Max pooling 2	      	| 2x2 stride, VALID padding, outputs 6x6x30 |
-| Flaten	      	    | inputs 6x6x30, outputs 1024 	|
-| Fully connected 1		| inputs 1024 , outputs 120        		|
+| Flaten	      	    | inputs 6x6x30, outputs 1080 	|
+| Fully connected 1		| inputs 1080 , outputs 120        		|
 | Leaky-RELU 3			| leak-slope 0.2					    	|
 | Dropout 1| |
 | Fully connected 2		| input 120 , output 84        	    	|
